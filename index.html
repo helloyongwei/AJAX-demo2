@@ -16,7 +16,7 @@
             xhr.open(method, url)
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
-                    if(xhr.status >= 200 && xhr.statue <= 300) {
+                    if(xhr.status >= 200 && xhr.status <= 300) {
                         success.call(undefined, xhr.responseText)
                     }  else if(xhr.status >= 400) {
                         fail.call(undefined, xhr)
