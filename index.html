@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <button id=btn>点击我</button>
+    <script>
+        window.$=window.jQuery
+        window.jQuery.ajax = function({url, method, body, success, fail}) {
+            let xhr = new XMLHttpRequest()
+            xhr.open(method, url)
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if(xhr.status >= 200 && xhr.statue <= 300) {
+                        success.call(undefined, xhr.responseText)
+                    }  else if(xhr.status >= 400) {
+                        fail.call(undefined, xhr)
+                    }
+                } 
+            }
+            xhr.send(body)
+        }
+
+        btn.addEventListener('click', function(){
+            $.ajax({
+                url: '/xxx',
+                method: 'POST',
+                success: function(text) {
+                    console.log(text)
+                },
+                fail: function(text) {
+                    console.log(text)
+                }
+            })
+        })
+    </script>
+</body>
+</html>
